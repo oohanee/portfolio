@@ -40,6 +40,8 @@ export default async function ProjectDetailPage({
         notFound()
     }
 
+    const hasAction = typeof project.action === 'string' && project.action.trim().length > 0
+
     return (
         <div className="max-w-5xl mx-auto p-12">
 
@@ -50,19 +52,13 @@ export default async function ProjectDetailPage({
                     {/* Logo */}
                     <div className="flex items-center">
                         <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center">
-                            {project.icon ? (
-                                <Image
-                                    src={project.icon}
-                                    alt={project.title}
-                                    width={96}
-                                    height={96}
-                                    className="rounded-2xl"
-                                />
-                            ) : (
-                                <span className="text-4xl">
-                                    {project.categories.icon}
-                                </span>
-                            )}
+                            <Image
+                                src={project.icon}
+                                alt={project.title}
+                                width={96}
+                                height={96}
+                                className="rounded-2xl"
+                            />
                         </div>
                     </div>
 
@@ -84,10 +80,29 @@ export default async function ProjectDetailPage({
                     </div>
 
                     {/* Button */}
-                    <div className="flex items-center justify-center md:justify-end">
-                        <button className="bg-green-500 text-white px-8 py-3 rounded-full font-normal hover:scale-105 transition-transform">
-                            Run App
-                        </button>
+                    <div className="relative flex items-center justify-center md:justify-end group">
+                        {hasAction ? (
+                            <a
+                                href={project.action}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-green-500 text-white px-8 py-3 rounded-full hover:scale-105 transition-transform inline-block"
+                            >
+                                Open Project
+                            </a>
+                        ) : (
+                            <a
+                                href={`mailto:hanamaliyyaa@gmail.com?subject=Request Demo – ${project.title}&body=Hi,%0A%0AI’d like to request a demo for the project "${project.title}".`}
+                                className="bg-black text-white px-8 py-3 rounded-full hover:scale-105 transition-transform inline-block">
+                                Request Demo
+                            </a>
+                        )}
+                        {!hasAction && (
+                            <div
+                                className="absolute top-full right-0 mb-3 w-72 bg-[#181818] text-[#B3B3B3] text-xs p-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                This demo runs on a private environment. Clicking this will open your default email app to request a demo.
+                            </div>
+                        )}
                     </div>
 
                 </div>

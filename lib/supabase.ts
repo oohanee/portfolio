@@ -23,4 +23,5 @@ export type Project = {
   tech_stack: string[] | null
   thumbnail: string | null
   screenshots: string[] | null
+  action: string | null
 }
