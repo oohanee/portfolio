@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
     const { data: categories } = await supabase
         .from('categories')
