@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import Slider from '@/components/slider'
 
-
+export const dynamic = 'force-dynamic'
 export async function generateStaticParams() {
     const { data: projects } = await supabase
         .from('projects')
