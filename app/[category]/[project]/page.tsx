@@ -45,7 +45,7 @@ export default async function ProjectDetailPage({
 
             {/* Project Header */}
             <div className="mb-8">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-4 md:gap-0">
 
                     {/* Logo */}
                     <div className="flex items-center">
@@ -67,7 +67,7 @@ export default async function ProjectDetailPage({
                     </div>
 
                     {/* Name, Category, Year */}
-                    <div className="flex-1 px-6 text-left">
+                    <div className="flex-1 md:px-6 text-center md:text-left">
                         <h1 className="text-3xl font-bold mb-2">
                             {project.title}
                         </h1>
@@ -84,7 +84,7 @@ export default async function ProjectDetailPage({
                     </div>
 
                     {/* Button */}
-                    <div className="flex items-center justify-end">
+                    <div className="flex items-center justify-center md:justify-end">
                         <button className="bg-green-500 text-white px-8 py-3 rounded-full font-normal hover:scale-105 transition-transform">
                             Run App
                         </button>
@@ -111,10 +111,10 @@ export default async function ProjectDetailPage({
                 </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* What I Did Section */}
                 {project.what_i_did && project.what_i_did.length > 0 && (
-                    <div className="col-span-2">
+                    <div className="lg:col-span-2">
                         <h2 className="text-2xl font-bold mb-4">What did I do</h2>
                         <div className="bg-[#181818] rounded-lg p-6">
                             <ul className="space-y-3 text-[#B3B3B3]">
@@ -131,7 +131,7 @@ export default async function ProjectDetailPage({
 
                 {/* Tech Stack Section */}
                 {project.tech_stack && project.tech_stack.length > 0 && (
-                    <div className="col-span-1">
+                    <div className="lg:col-span-1">
                         <h2 className="text-2xl font-bold mb-4">Tech stack and libraries</h2>
                         <div className="bg-[#181818] rounded-lg p-6">
                             <ul className="flex gap-4 flex-wrap items-center">

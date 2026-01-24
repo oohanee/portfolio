@@ -59,20 +59,20 @@ export default async function CategoryPage({
                             <div className="bg-[#181818] rounded-lg overflow-hidden hover:bg-[#282828] transition-colors">
                                 {/* thumbnail */}
                                 <div className="aspect-video bg-gradient-to-br from-green-400/20 to-green-600/20 relative overflow-hidden">
-                                        <Image
-                                            src={project.thumbnail}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover"
-                                        />
+                                    <Image
+                                        src={project.thumbnail}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover"
+                                    />
                                 </div>
 
                                 {/* project info */}
                                 <div className="p-6">
-                                    <div className="flex items-center justify-between gap-4">
+                                    <div className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4">
 
                                         {/* icon + info */}
-                                        <div className="flex items-center gap-4 flex-1">
+                                        <div className="flex items-center gap-4 flex-1 w-full sm:w-auto">
 
                                             {/* icon */}
                                             {project.icon && (
@@ -106,7 +106,7 @@ export default async function CategoryPage({
                                         </div>
 
                                         {/* button */}
-                                        <button className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap">
+                                        <button className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto">
                                             View more
                                         </button>
 
