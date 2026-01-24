@@ -132,7 +132,7 @@ export default async function ProjectDetailPage({
                 {/* Tech Stack Section */}
                 {project.tech_stack && project.tech_stack.length > 0 && (
                     <div className="col-span-1">
-                        <h2 className="text-2xl font-bold mb-4">Tech Stack and Libraries</h2>
+                        <h2 className="text-2xl font-bold mb-4">Tech stack and libraries</h2>
                         <div className="bg-[#181818] rounded-lg p-6">
                             <ul className="flex gap-4 flex-wrap items-center">
                                 {project.tech_stack.map((tech: string, i: number) => (
