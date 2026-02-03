@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export async function generateStaticParams() {
     const { data: categories } = await supabase
@@ -60,7 +60,7 @@ export default async function CategoryPage({
                             className="group">
                             <div className="bg-[#181818] rounded-lg overflow-hidden hover:bg-[#282828] transition-colors">
                                 {/* thumbnail */}
-                                <div className="aspect-video bg-gradient-to-br from-green-400/20 to-green-600/20 relative overflow-hidden">
+                                <div className="aspect-video bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 relative overflow-hidden">
                                     <Image
                                         src={project.thumbnail}
                                         alt={project.title}
@@ -78,7 +78,7 @@ export default async function CategoryPage({
 
                                             {/* icon */}
                                             {project.icon && (
-                                                <div className="w-16 h-16 rounded-lg bg-green-500 flex-shrink-0 overflow-hidden relative">
+                                                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 flex-shrink-0 overflow-hidden relative">
                                                     <Image
                                                         src={project.icon}
                                                         alt={`${project.title} logo`}
@@ -90,7 +90,7 @@ export default async function CategoryPage({
 
                                             {/* title & tags */}
                                             <div className="flex-1 min-w-0">
-                                                <h3 className="text-xl font-bold mb-1 group-hover:text-green-400 transition-colors">
+                                                <h3 className="text-xl font-bold mb-1 transition-all group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:via-violet-400 group-hover:to-teal-100 group-hover:bg-clip-text group-hover:text-transparent">
                                                     {project.title}
                                                 </h3>
 
@@ -108,7 +108,7 @@ export default async function CategoryPage({
                                         </div>
 
                                         {/* button */}
-                                        <button className="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto">
+                                        <button className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto">
                                             View more
                                         </button>
 

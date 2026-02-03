@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import Slider from '@/components/slider'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export async function generateStaticParams() {
     const { data: projects } = await supabase
@@ -52,7 +52,7 @@ export default async function ProjectDetailPage({
 
                     {/* Logo */}
                     <div className="flex items-center">
-                        <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center">
+                        <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 rounded-2xl flex items-center justify-center">
                             <Image
                                 src={project.icon}
                                 alt={project.title}
@@ -87,7 +87,7 @@ export default async function ProjectDetailPage({
                                 href={project.action}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-green-500 text-white px-8 py-3 rounded-full hover:scale-105 transition-transform inline-block"
+                                className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 text-white px-8 py-3 rounded-full hover:scale-105 transition-transform inline-block"
                             >
                                 Open Project
                             </a>
@@ -136,7 +136,7 @@ export default async function ProjectDetailPage({
                             <ul className="space-y-3 text-[#B3B3B3]">
                                 {project.what_i_did.map((task: string, i: number) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <span className="text-green-500 mt-1">•</span>
+                                        <span className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 bg-clip-text text-transparent mt-1">•</span>
                                         <span>{task}</span>
                                     </li>
                                 ))}
@@ -150,7 +150,7 @@ export default async function ProjectDetailPage({
                     <div className="lg:col-span-1">
                         <h2 className="text-2xl font-bold mb-4">Tech stack and libraries</h2>
                         <div className="bg-[#181818] rounded-lg p-6">
-                            <ul className="flex gap-4 flex-wrap items-center">
+                            <ul className="flex gap-2 flex-wrap items-center">
                                 {project.tech_stack.map((tech: string, i: number) => (
                                     <li key={i} className="h-[48px] px-3 bg-[#181818] rounded-lg flex items-center justify-center">
                                         <Image

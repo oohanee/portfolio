@@ -8,6 +8,10 @@ interface Props {
     title: string
 }
 
+const IMAGE_EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg']
+const isImage = (url: string) =>
+    IMAGE_EXTENSIONS.some(ext => url.toLowerCase().endsWith(ext))
+
 const isYouTubeUrl = (url: string) => {
     return url.includes('youtube.com') || url.includes('youtu.be')
 }
@@ -25,7 +29,6 @@ export default function ScreenshotSlider({ screenshots, title }: Props) {
     const [canScrollRight, setCanScrollRight] = useState(false)
 
     const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
-    const [isSelectedVideo, setIsSelectedVideo] = useState(false)
 
     const scroll = (direction: 'left' | 'right') => {
         if (!sliderRef.current) return
@@ -42,17 +45,18 @@ export default function ScreenshotSlider({ screenshots, title }: Props) {
         if (!el) return
 
         setCanScrollLeft(el.scrollLeft > 0)
-        setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+        const threshold = 5
+        setCanScrollRight(
+            el.scrollLeft + el.clientWidth < el.scrollWidth - threshold
+        )
     }
 
     const handleMediaClick = (media: string) => {
         setSelectedMedia(media)
-        setIsSelectedVideo(isYouTubeUrl(media))
     }
 
     const closeModal = () => {
         setSelectedMedia(null)
-        setIsSelectedVideo(false)
     }
 
     useEffect(() => {
@@ -98,11 +102,11 @@ export default function ScreenshotSlider({ screenshots, title }: Props) {
                                 onClick={() => handleMediaClick(media)}
                                 className={`bg-[#181818] rounded-lg overflow-hidden flex-shrink-0 cursor-pointer focus:outline-none
                                 ${isVideo
-                                    ? isShort
-                                        ? 'h-[220px] aspect-[9/16]'
-                                        : 'h-[220px] aspect-video'
-                                    : 'h-[220px] min-w-[90px] max-w-[360px]'
-                                }`}
+                                        ? isShort
+                                            ? 'h-[220px] aspect-[9/16]'
+                                            : 'h-[220px] aspect-video'
+                                        : 'h-[220px] min-w-[90px] max-w-[360px]'
+                                    }`}
                             >
                                 {isVideo ? (
                                     <iframe
@@ -136,7 +140,6 @@ export default function ScreenshotSlider({ screenshots, title }: Props) {
                         className="relative max-w-[80vw] max-h-[80vh]"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Close button */}
                         <button
                             onClick={closeModal}
                             className="absolute -top-12 right-0 text-white text-3xl hover:opacity-80"
@@ -145,7 +148,16 @@ export default function ScreenshotSlider({ screenshots, title }: Props) {
                         </button>
 
                         <div className="ax-h-[80vh] rounded-lg overflow-y-auto flex items-center justify-center">
-                            {isSelectedVideo ? (
+                            {isImage(selectedMedia) ? (
+                                <Image
+                                    src={selectedMedia}
+                                    alt="Preview"
+                                    width={1600}
+                                    height={1600}
+                                    className="max-w-[80vw] max-h-[80vh] w-auto h-auto object-contain"
+                                    priority
+                                />
+                            ) : (
                                 <iframe
                                     src={getYouTubeEmbedUrl(selectedMedia)}
                                     className={
@@ -154,15 +166,6 @@ export default function ScreenshotSlider({ screenshots, title }: Props) {
                                             : 'w-[80vw] max-h-[80vh] aspect-video'
                                     }
                                     allowFullScreen
-                                />
-                            ) : (
-                                <Image
-                                    src={selectedMedia}
-                                    alt="Preview"
-                                    width={1600}
-                                    height={1600}
-                                    className="max-w-[80vw] max-h-[80vh] w-auto h-auto object-contain"
-                                    priority
                                 />
                             )}
                         </div>
