@@ -119,7 +119,7 @@ export default async function ProjectDetailPage({
 
             {/* About Section */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-4">About this app</h2>
+                <h2 className="text-2xl font-bold mb-4">About this project</h2>
                 <div className="bg-[#181818] rounded-lg p-6">
                     <p className="text-[#B3B3B3] leading-relaxed whitespace-pre-line">
                         {project.description || 'No description available.'}
