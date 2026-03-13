@@ -51,6 +51,7 @@ export default async function ProjectDetailPage({
                 <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-4 md:gap-0">
 
                     {/* Logo */}
+                    {project.icon && (
                     <div className="flex items-center">
                         <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 rounded-2xl flex items-center justify-center">
                             <Image
@@ -62,6 +63,7 @@ export default async function ProjectDetailPage({
                             />
                         </div>
                     </div>
+                    )}
 
                     {/* Name, Category, Year */}
                     <div className="flex-1 md:px-6 text-center md:text-left">
@@ -135,8 +137,8 @@ export default async function ProjectDetailPage({
                         <div className="bg-[#181818] rounded-lg p-6">
                             <ul className="space-y-3 text-[#B3B3B3]">
                                 {project.what_i_did.map((task: string, i: number) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <span className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 bg-clip-text text-transparent mt-1">•</span>
+                                    <li key={i} className="flex items-center gap-3">
+                                        <span className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 bg-clip-text text-transparent">•</span>
                                         <span>{task}</span>
                                     </li>
                                 ))}
