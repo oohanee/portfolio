@@ -15,6 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="google-site-verification" content="WVc_dhMyax5ltcQRwrSeX1_U4CF6QzrA2VSu_iblW4Y" />
+        <meta name="keywords" content="software engineer portfolio, project showcase" />
+        <meta name="author" content="Hanaanam Maliyyaa" />
         <title>Hana&#39;s Portfolio</title>
       </head>
       <body className="antialiased">
