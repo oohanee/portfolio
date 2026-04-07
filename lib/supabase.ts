@@ -13,6 +13,11 @@ export type Category = {
   icon_active: string | null
 }
 
+export type TechStack = {
+  name: string
+  icon: string
+}
+
 export type Project = {
   id: number
   title: string
@@ -20,7 +25,7 @@ export type Project = {
   category_id: number
   description: string | null
   tags: string[] | null
-  tech_stack: string[] | null
+  tech_stack: TechStack[] | null
   thumbnail: string | null
   screenshots: string[] | null
   action: string | null

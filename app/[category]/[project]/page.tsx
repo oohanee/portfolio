@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import Slider from '@/components/slider'
+import Link from 'next/link'
 
 export const revalidate = 60
 
@@ -52,17 +53,17 @@ export default async function ProjectDetailPage({
 
                     {/* Logo */}
                     {project.icon && (
-                    <div className="flex items-center">
-                        <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 rounded-2xl flex items-center justify-center">
-                            <Image
-                                src={project.icon}
-                                alt={project.title}
-                                width={96}
-                                height={96}
-                                className="rounded-2xl"
-                            />
+                        <div className="flex items-center">
+                            <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 rounded-2xl flex items-center justify-center">
+                                <Image
+                                    src={project.icon}
+                                    alt={project.title}
+                                    width={96}
+                                    height={96}
+                                    className="rounded-2xl"
+                                />
+                            </div>
                         </div>
-                    </div>
                     )}
 
                     {/* Name, Category, Year */}
@@ -153,15 +154,17 @@ export default async function ProjectDetailPage({
                         <h2 className="text-2xl font-bold mb-4">Tech stack and libraries</h2>
                         <div className="bg-[#181818] rounded-lg p-6">
                             <ul className="flex gap-2 flex-wrap items-center">
-                                {project.tech_stack.map((tech: string, i: number) => (
-                                    <li key={i} className="h-[48px] px-3 bg-[#181818] rounded-lg flex items-center justify-center">
-                                        <Image
-                                            src={tech}
-                                            alt={`${project.title} tech stack ${i + 1}`}
-                                            width={100}
-                                            height={100}
-                                            className="w-full h-full object-contain"
-                                        />
+                                {project.tech_stack.map((tech: { name: string; icon: string }, i: number) => (
+                                    <li key={i}
+                                            className="h-[48px] px-3 bg-[#181818] rounded-lg flex items-center justify-center"
+                                            title={tech.name}>
+                                            <Image
+                                                src={tech.icon}
+                                                alt={tech.name}
+                                                width={100}
+                                                height={100}
+                                                className="w-full h-full object-contain"
+                                            />
                                     </li>
                                 ))}
                             </ul>
