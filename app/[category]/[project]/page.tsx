@@ -73,13 +73,32 @@ export default async function ProjectDetailPage({
                         </h1>
 
                         {project.tags && project.tags.length > 0 && (
-                            <p className="text-[#B3B3B3] mb-1">
-                                {project.tags.join(' · ')}
-                            </p>
+                            <div className="flex flex-wrap gap-1 text-[#B3B3B3] mb-1">
+                                {project.tags.map((tag: string, i: number) => (
+                                    <span key={i}>
+                                        <Link
+                                            href={`/discover?tag=${encodeURIComponent(tag)}`}
+                                            className="transition-all duration-300 
+                                            hover:bg-gradient-to-br hover:from-indigo-500 hover:via-violet-400 hover:to-teal-100 
+                                            hover:bg-clip-text hover:text-transparent"
+                                        >
+                                            {tag}
+                                        </Link>
+                                        {i < project.tags.length - 1 && ' · '}
+                                    </span>
+                                ))}
+                            </div>
                         )}
 
                         <p className="text-[#B3B3B3]">
-                            {project.year}
+                            <Link
+                                href={`/discover?year=${encodeURIComponent(project.year)}`}
+                                className="transition-all duration-300 
+                                hover:bg-gradient-to-br hover:from-indigo-500 hover:via-violet-400 hover:to-teal-100 
+                                hover:bg-clip-text hover:text-transparent"
+                                                >
+                                {project.year}
+                            </Link>
                         </p>
                     </div>
 
@@ -155,16 +174,22 @@ export default async function ProjectDetailPage({
                         <div className="bg-[#181818] rounded-lg p-6">
                             <ul className="flex gap-2 flex-wrap items-center">
                                 {project.tech_stack.map((tech: { name: string; icon: string }, i: number) => (
-                                    <li key={i}
-                                            className="h-[48px] px-3 bg-[#181818] rounded-lg flex items-center justify-center"
-                                            title={tech.name}>
-                                            <Image
-                                                src={tech.icon}
-                                                alt={tech.name}
-                                                width={100}
-                                                height={100}
-                                                className="w-full h-full object-contain"
-                                            />
+                                    <li key={i}>
+                                        <div className="group p-[2px] rounded-lg transition-all hover:bg-gradient-to-br hover:from-indigo-500 hover:via-violet-400 hover:to-teal-100">
+                                            <Link
+                                                href={`/discover?tech=${encodeURIComponent(tech.name)}`}
+                                                className="h-[48px] bg-[#181818] rounded-lg flex items-center justify-center tooltip-wrapper"
+                                                title={tech.name}
+                                            >
+                                                <Image
+                                                    src={tech.icon}
+                                                    alt={tech.name}
+                                                    width={100}
+                                                    height={100}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </Link>
+                                        </div>
                                     </li>
                                 ))}
                             </ul>
