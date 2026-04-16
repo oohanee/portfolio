@@ -24,7 +24,7 @@ export default function RootLayout({
         <meta name="description" content="Portfolio of Hanaanam Maliyyaa, a software engineer specializing in web development, mobile apps, data-driven projects, UI/UX design, and infrastructure. Explore selected projects and technical skills." />
 
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://folio-showcase.vercel.app/" />
+        <link rel="canonical" href="https://folio-showcase.vercel.app/building-for-web" />
 
         <meta name="keywords" content="software engineer portfolio, web developer portfolio, mobile developer portfolio, full stack developer, backend developer, frontend developer, UI UX, data projects" />
 
