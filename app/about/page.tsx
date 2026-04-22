@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+//import ProfileTab from '@/components/profiletab'
 import { supabase } from '@/lib/supabase'
 
 export const revalidate = 60
@@ -38,10 +39,9 @@ export default async function AboutPage() {
         <h1 className="text-4xl font-bold mb-1">About me</h1>
         <div className="h-[3px] w-20 bg-gradient-to-r from-indigo-500 via-violet-500 to-teal-500 rounded-full mb-4"></div>
         <p className="text-[#B3B3B3] text-justify leading-relaxed">
-          Hi! I&apos;m Hanaanam Maliyyaa, a recent graduate in Software Engineering Technology with a strong interest in building reliable and impactful applications.
-          I have hands-on experience working across the end-to-end Software Development Life Cycle (SDLC) — from understanding user requirements, designing system solutions, to implementation, and even end-user training.
-          I am known for being detail-oriented, structured in my work, and having strong analytical thinking. I enjoy solving problems, collaborating with teams, and continuously learning new technologies to improve my skills.
-          Currently, I am focused on growing as a fullstack developer and building solutions that create meaningful impact.
+          Hi! I&apos;m Hana, a recent graduate in Software Engineering Technology with a strong interest in building reliable and impactful applications.
+          I have hands-on experience working across the end-to-end SDLC from understanding user requirements, designing system solutions, to implementation, and even end-user training.
+          I enjoy solving problems, collaborating with teams, and continuously learning new technologies to improve my skills.
         </p>
       </div>
       {/* 
@@ -53,6 +53,7 @@ export default async function AboutPage() {
             { label: 'Status', value: 'Final year student, open to opportunities' },
             { label: 'Focus', value: 'Web development & UI/UX Design' },
             { label: 'Based in', value: 'Bogor, Indonesia' },
+             I am known for being detail-oriented, structured in my work, and having strong analytical thinking. 
           ].map((item) => (
             <div key={item.label} className="flex gap-4">
               <span className="text-[#B3B3B3] w-24 shrink-0">{item.label}</span>
@@ -61,23 +62,10 @@ export default async function AboutPage() {
           ))}
         </div>
       </div>
-
-      {/* Education}
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-4">Education</h2>
-        <div className="bg-[#181818] rounded-lg p-6">
-          <div className="flex justify-between items-start gap-4">
-            <div>
-              <p className="font-semibold">IPB University</p>
-              <p className="text-[#B3B3B3] text-sm">
-                Software Engineering Technology · Vocational School
-              </p>
-            </div>
-            <span className="text-[#B3B3B3] text-sm shrink-0">2021 – 2025</span>
-          </div>
-        </div>
-      </div>
        **/}
+
+      {/* Education 
+      <ProfileTab /> */}
 
       {/* Tech Stack */}
       <div className="mb-12">

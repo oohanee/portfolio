@@ -74,7 +74,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
             className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors"
             aria-label="Social links">
             <Image
-              src="/favicon.ico"
+              src="/images/portfolio/logo.webp"
               alt="menu"
               width={36}
               height={36}

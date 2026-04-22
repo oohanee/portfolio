@@ -17,13 +17,10 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ category: string }>
-  searchParams: Promise<{ tech?: string }>
 }) {
   const { category } = await params
-  const { tech } = await searchParams
 
   const { data: categoryData } = await supabase
     .from('categories')
@@ -31,22 +28,15 @@ export default async function CategoryPage({
     .eq('slug', category)
     .single()
 
-  if (!categoryData) notFound()
+  if (!categoryData) {
+    notFound()
+  }
 
   const { data: projects } = await supabase
     .from('projects')
     .select('*')
     .eq('category_id', categoryData.id)
     .order('id', { ascending: false })
-
-  // Filter by tech if query param exists
-  const filteredProjects = tech
-    ? projects?.filter((p) =>
-        p.tech_stack?.some(
-          (t: { name: string }) => t.name.toLowerCase() === tech.toLowerCase()
-        )
-      )
-    : projects
 
   return (
     <div className="p-12">
@@ -56,30 +46,15 @@ export default async function CategoryPage({
 
         <div className="flex items-center gap-3">
           <p className="text-[#B3B3B3]">
-            {filteredProjects?.length || 0} projects
+            {projects?.length || 0} projects
           </p>
-
-          {/* Active filter badge */}
-          {tech && (
-            <div className="flex items-center gap-2 bg-[#181818] px-3 py-1 rounded-full text-sm">
-              <span className="text-[#B3B3B3]">Tech:</span>
-              <span className="text-white">{tech}</span>
-              <Link
-                href={`/${category}`}
-                className="text-[#B3B3B3] hover:text-white transition-colors ml-1"
-                aria-label="Clear filter"
-              >
-                ✕
-              </Link>
-            </div>
-          )}
         </div>
       </div>
 
       {/* projects grid */}
-      {filteredProjects && filteredProjects.length > 0 ? (
+      {projects && projects.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <Link
               key={project.id}
               href={`/${category}/${project.slug}`}
@@ -142,19 +117,7 @@ export default async function CategoryPage({
         </div>
       ) : (
         <div className="text-center py-16 text-[#B3B3B3]">
-          <p className="text-lg">
-            {tech
-              ? `No projects using ${tech} in this category`
-              : 'No projects yet in this category'}
-          </p>
-          {tech && (
-            <Link
-              href={`/${category}`}
-              className="mt-4 inline-block text-sm text-violet-400 hover:text-violet-300 transition-colors"
-            >
-              ← Show all projects
-            </Link>
-          )}
+          <p className="text-lg">No projects yet in this category</p>
         </div>
       )}
     </div>
