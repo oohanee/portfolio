@@ -55,9 +55,8 @@ export default async function CategoryPage({
       {projects && projects.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
-            <Link
+            <div
               key={project.id}
-              href={`/${category}/${project.slug}`}
               className="group">
               <div className="bg-[#181818] rounded-lg overflow-hidden hover:bg-[#282828] transition-colors">
                 {/* thumbnail */}
@@ -105,14 +104,17 @@ export default async function CategoryPage({
                       </div>
                     </div>
 
-                    <button className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto">
+                    <Link
+                      href={`/${category}/${project.slug}`}
+                      className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto text-center"
+                    >
                       View more
-                    </button>
+                    </Link>
 
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       ) : (

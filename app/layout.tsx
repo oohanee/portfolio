@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -11,6 +12,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
+  const noSidebarRoutes = [
+    "/about",
+    "/discover",
+  ];
+
+  const showSidebar = !noSidebarRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
 
   return (
     <html lang="en">
@@ -36,8 +46,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <div className="flex h-screen overflow-hidden">
-          {/* Overlay untuk mobile */}
-          {isSidebarOpen && (
+          {/* Overlay mobile */}
+          {showSidebar && isSidebarOpen && (
             <div
               className="fixed inset-0 bg-black/60 z-40 lg:hidden"
               onClick={() => setIsSidebarOpen(false)}
@@ -45,17 +55,22 @@ export default function RootLayout({
           )}
 
           {/* Sidebar */}
-          <Sidebar
-            isOpen={isSidebarOpen}
-            onClose={() => setIsSidebarOpen(false)}
-          />
+          {showSidebar && (
+            <Sidebar
+              isOpen={isSidebarOpen}
+              onClose={() => setIsSidebarOpen(false)}
+            />
+          )}
 
-          {/* Main content area */}
+          {/* Main content */}
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Navbar */}
-            <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
+            <Navbar
+              onMenuClick={() => setIsSidebarOpen(true)}
+              showMenu={showSidebar}
+            />
 
-            {/* Page content */}
+            {/* Page */}
             <main className="flex-1 overflow-y-auto">
               {children}
             </main>

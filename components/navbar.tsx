@@ -6,9 +6,10 @@ import Image from 'next/image'
 
 interface NavbarProps {
   onMenuClick: () => void;
+  showMenu?: boolean;
 }
 
-export default function Navbar({ onMenuClick }: NavbarProps) {
+export default function Navbar({ onMenuClick, showMenu = true }: NavbarProps) {
   const [open, setOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -34,14 +35,27 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
     <nav className="bg-black/50 backdrop-blur-sm border-b border-white/10 px-4 md:px-8 py-4 flex items-center justify-between sticky top-0 z-40">
       {/* Left side - Hamburger + Navigation arrows */}
       <div className="flex items-center gap-4">
-        <button
-          onClick={onMenuClick}
-          className="lg:hidden w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/70 transition-colors"
-          aria-label="Open menu">
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        {showMenu ? (
+          <button
+            onClick={onMenuClick}
+            className="lg:hidden w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/70 transition-colors"
+            aria-label="Open menu">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        ) : (
+          <Link
+            href="/"
+            className="lg:hidden w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/70 transition-colors"
+            aria-label="Home"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75" />
+            </svg>
+          </Link>
+        )}
         <div className="hidden sm:flex items-center gap-2 md:gap-4">
           <button onClick={() => router.back()} className="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/70 transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,11 +71,28 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
       </div>
 
       {/* Right side - Social dropdown */}
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-2">
+        <Link
+          href="/discover"
+          className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 48 48">
+            <path d="M0 0h48v48H0z" fill="none" />
+            <defs>
+              <mask id="SVGzmt0MemV">
+                <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4">
+                  <path fill="#555" d="M21 38c9.389 0 17-7.611 17-17S30.389 4 21 4S4 11.611 4 21s7.611 17 17 17Z" />
+                  <path stroke-linecap="round" d="M26.657 14.343A7.98 7.98 0 0 0 21 12a7.98 7.98 0 0 0-5.657 2.343m17.879 18.879l8.485 8.485" />
+                </g>
+              </mask>
+            </defs>
+            <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGzmt0MemV)" />
+          </svg>
+        </Link>
         {/* About — navigasi internal, pakai pill */}
         <Link
           href="/about"
-          className="text-sm font-medium text-white px-3 py-1 rounded-full bg-white/8 border border-white/15 hover:bg-white/15 transition-colors"
+          className="h-8 px-3 rounded-full bg-white/8 border border-white/15 hover:bg-white/15 transition-colors inline-flex items-center text-sm font-medium text-white"
         >
           About
         </Link>
