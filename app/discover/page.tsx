@@ -83,7 +83,7 @@ export default async function DiscoverPage({
 
                         <Link
                           href={`/${project.categories.slug}/${project.slug}`}
-                          className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto"
+                          className="bg-gradient-to-br from-indigo-500 via-violet-400 to-teal-100 text-white px-6 py-2 rounded-full text-sm font-normal hover:scale-105 transition-transform whitespace-nowrap w-full sm:w-auto text-center"
                         >
                           View more
                         </Link>
